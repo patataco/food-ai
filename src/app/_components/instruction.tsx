@@ -3,6 +3,9 @@ import { type RecipeType } from '~/models';
 type InstructionType = Pick<RecipeType, 'instruction'>;
 
 const Instruction = ({ instruction }: InstructionType) => {
+  const str = instruction?.[0] ?? '';
+  const hasNumber = /^\d/.test(str);
+
   return (
     <div className="flex w-full flex-1 flex-col items-center justify-center gap-2">
       <div className="text-xl font-medium">요리 순서</div>
@@ -10,7 +13,7 @@ const Instruction = ({ instruction }: InstructionType) => {
         {instruction.map((item, index) => {
           return (
             <div key={index} className="text-base text-neutral-500 lg:text-lg">
-              <span>{`${index + 1}. `}</span>
+              {!hasNumber && <span>{`${index + 1}. `}</span>}
               <span>{item}</span>
             </div>
           );
