@@ -14,6 +14,7 @@ import PreferencesSelector from '~/app/_components/PreferencesSelector';
 import SeasoningsList from '~/app/_components/SeasoningsList';
 import { SubTitle } from '~/app/_components/SubTitle';
 import TitleWrapper from '~/app/_components/TitleWrapper';
+import TrpcErrorAlert from '~/app/_components/TrpcErrorAlert';
 import TypeOfCuisineSelector from '~/app/_components/TypeOfCuisineSelector';
 import BackDrop from '~/app/_components/ui/BackDrop';
 import { Form } from '~/app/_components/ui/form';
@@ -27,6 +28,7 @@ const RecipesCreationForm = ({
 }) => {
   const { isLoading, mutateAsync } = api.ai.generateText.useMutation();
   const [open, setOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState<boolean>(false);
 
   const router = useRouter();
   const form = useForm<DishParamsType>({
@@ -57,7 +59,11 @@ const RecipesCreationForm = ({
       setOpen(true);
       return;
     }
-    const result = await mutateAsync(form.getValues());
+    const result = await mutateAsync(form.getValues(), {
+      onError() {
+        setAlertOpen(true);
+      },
+    });
     if (result?.id) {
       router.push(`/recipe/${result.id}`);
     } else {
@@ -104,6 +110,7 @@ const RecipesCreationForm = ({
           <ExtraDescriptionInput />
         </IngredientsSection>
         <DishParamsSubmitButton open={open} setOpen={setOpen} />
+        <TrpcErrorAlert alertOpen={alertOpen} setAlertOpen={setAlertOpen} />
       </form>
     </Form>
   );
