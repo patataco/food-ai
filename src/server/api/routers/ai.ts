@@ -19,6 +19,7 @@ export const aiRouter = createTRPCRouter({
         const params = getChatParams(prompt);
         const completion = await openai.chat.completions.create(params);
         const generatedText = completion?.choices[0]?.message?.content ?? '';
+        console.log('res', generatedText);
         const parsed = Recipes.safeParse(JSON.parse(generatedText));
         if (parsed.success) {
           const recipes = parsed.data;
