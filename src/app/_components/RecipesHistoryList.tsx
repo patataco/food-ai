@@ -16,7 +16,7 @@ const RecipesHistoryList = ({
   histories: HistoriesOfRecipeType;
 }) => {
   return (
-    <div className="flex w-full flex-col gap-4 bg-white px-2 py-8">
+    <div className="flex min-h-[600px] w-full flex-col gap-4 bg-white px-2 py-8">
       {histories.map((history) => {
         const { id, ingredients, recipes, createdAt } = history;
         const cuisineTitle = recipes[0]

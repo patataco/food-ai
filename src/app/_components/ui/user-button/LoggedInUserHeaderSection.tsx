@@ -19,7 +19,6 @@ type LoggedInUserHeaderSectionProps = {
 const LoggedInUserHeaderSection = ({
   session,
 }: LoggedInUserHeaderSectionProps) => {
-  const imgUrl = session.user.image ?? '';
   const router = useRouter();
   const goToUserHistory = () => {
     router.push('/history');
@@ -31,7 +30,15 @@ const LoggedInUserHeaderSection = ({
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button className="p-0">
-          <img src={imgUrl} alt="user" className="h-9 w-9 rounded-full" />
+          {session.user.image ? (
+            <img
+              src={session.user.image}
+              alt="user"
+              className="h-9 w-9 rounded-full"
+            />
+          ) : (
+            <div className="h-9 w-9 rounded-full bg-green-800" />
+          )}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>

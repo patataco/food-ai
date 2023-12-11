@@ -5,6 +5,7 @@ import {
   type NextAuthOptions,
 } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import KakaoProvider from 'next-auth/providers/kakao';
 
 import { db } from '~/server/db';
 
@@ -34,6 +35,7 @@ declare module 'next-auth' {
  *
  * @see https://next-auth.js.org/configuration/options
  */
+
 export const authOptions: NextAuthOptions = {
   callbacks: {
     session: ({ session, user }) => ({
@@ -58,6 +60,7 @@ export const authOptions: NextAuthOptions = {
         params: { scope: 'email profile' },
       },
     }),
+
     /**
      * ...add more providers here.
      *
@@ -67,6 +70,10 @@ export const authOptions: NextAuthOptions = {
      *
      * @see https://next-auth.js.org/providers/github
      */
+    KakaoProvider({
+      clientId: process.env.KAKAO_CLIENT_ID!,
+      clientSecret: process.env.KAKAO_CLIENT_SECRET!,
+    }),
   ],
 };
 
