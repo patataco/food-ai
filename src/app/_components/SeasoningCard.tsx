@@ -13,7 +13,7 @@ const SeasoningCard = (props: SeasoningCardProps) => {
     <Card
       onClick={onClick}
       className={cn(
-        'flex flex-col items-center justify-center aspect-square gap-1 font-medium',
+        'flex flex-col items-center justify-center aspect-square gap-1 font-medium cursor-pointer',
         isSelected ? 'shadow-[inset_0_-2px_8px_rgba(252,211,77,0.6)]' : '',
       )}>
       <div className="text-4xl">{image}</div>
