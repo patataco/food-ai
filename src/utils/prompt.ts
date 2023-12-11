@@ -44,7 +44,7 @@ export const getChatParams = (
       },
       { role: 'user', content: prompt },
     ],
-    model: 'gpt-4-1106-preview',
+    model: 'gpt-3.5-turbo',
     temperature: 0.7,
     ...params,
   };
