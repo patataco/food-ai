@@ -1,4 +1,5 @@
-import { aiRouter, postRouter } from '~/server/api/routers/post';
+import { aiRouter } from '~/server/api/routers/ai';
+import { postRouter } from '~/server/api/routers/post';
 import { createTRPCRouter } from '~/server/api/trpc';
 
 /**

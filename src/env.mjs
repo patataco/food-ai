@@ -40,6 +40,8 @@ export const env = createEnv({
    */
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_GOOGLE_SEARCH_API_KEY: z.string(),
+    NEXT_PUBLIC_GOOGLE_SEARCH_ENGINE: z.string(),
   },
 
   /**
@@ -51,6 +53,11 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+    NEXT_PUBLIC_GOOGLE_SEARCH_API_KEY:
+      process.env.NEXT_PUBLIC_GOOGLE_SEARCH_API_KEY,
+    NEXT_PUBLIC_GOOGLE_SEARCH_ENGINE:
+      process.env.NEXT_PUBLIC_GOOGLE_SEARCH_ENGINE,
+
     // DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
     // DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
   },
