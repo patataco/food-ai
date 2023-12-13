@@ -35,10 +35,10 @@ const DishParamsSubmitButton = ({
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
+            <AlertDialogTitle>🔒</AlertDialogTitle>
+            <AlertDialogDescription className="text-base">
+              <div>로그인이 필요한 서비스입니다.</div>
+              <div>로그인 하시겠습니까?</div>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
