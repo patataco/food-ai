@@ -5,6 +5,8 @@ import { env } from '~/env.mjs';
 import { appRouter } from '~/server/api/root';
 import { createTRPCContext } from '~/server/api/trpc';
 
+export const maxDuration = 30;
+
 const handler = (req: NextRequest) =>
   fetchRequestHandler({
     endpoint: '/api/trpc',
