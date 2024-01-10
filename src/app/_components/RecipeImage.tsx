@@ -23,7 +23,7 @@ export default RecipeImage;
 export const Loading = ({ className, ratio }: Omit<ImageProps, 'title'>) => {
   return (
     <div className={cn(ratio, className)}>
-      <Skeleton className="w-full" />
+      <Skeleton className="h-full w-full" />
     </div>
   );
 };

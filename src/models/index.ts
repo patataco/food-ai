@@ -13,7 +13,7 @@ export const TypeOfCuisine = z.enum([
 ]);
 
 const meats = ['소고기', '돼지고기', '돼지고기', '양고기', '닭고기'];
-const ingredient = z.tuple([z.string(), z.string()]);
+
 export const DishParams = z
   .object({
     ingredients: z
@@ -49,6 +49,10 @@ export const DishParams = z
     }
   });
 
+const ingredient = z.object({
+  ingredient: z.string(),
+  measurement: z.string(),
+});
 export const Recipe = z.object({
   title: z.string(),
   ingredients: z.array(ingredient),

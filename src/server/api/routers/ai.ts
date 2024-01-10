@@ -1,9 +1,10 @@
+import { get } from '@toss/utils';
 import { TRPCError } from '@trpc/server';
 import OpenAI from 'openai';
 import * as process from 'process';
 import { z } from 'zod';
 
-import { DishParams, Recipes } from '~/models';
+import { DishParams, Recipes, type RecipesType } from '~/models';
 import { createTRPCRouter, protectedProcedure } from '~/server/api/trpc';
 import { generatePrompt, getChatParams } from '~/utils';
 
@@ -18,11 +19,15 @@ export const aiRouter = createTRPCRouter({
         const prompt = generatePrompt(payload);
         const params = getChatParams(prompt);
         const completion = await openai.chat.completions.create(params);
-        const generatedText = completion?.choices[0]?.message?.content ?? '';
-        console.log('res', generatedText);
-        const parsed = Recipes.safeParse(JSON.parse(generatedText));
-        if (parsed.success) {
-          const recipes = parsed.data;
+        const res = get(
+          completion,
+          'choices[0].message.tool_calls[0].function.arguments',
+          '',
+        );
+        const parsedData = JSON.parse(res) as { result: RecipesType };
+        const zodParsed = Recipes.safeParse(parsedData.result);
+        if (zodParsed.success) {
+          const recipes = zodParsed.data;
           return await ctx.db.recipe.create({
             data: {
               ingredients: JSON.stringify(payload),
@@ -31,8 +36,7 @@ export const aiRouter = createTRPCRouter({
             },
           });
         } else {
-          console.log(generatedText);
-          console.error(parsed.error);
+          console.error(zodParsed.error);
         }
       } catch (e) {
         console.error(e);

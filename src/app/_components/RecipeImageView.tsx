@@ -12,8 +12,6 @@ const RecipeImageView = ({
 }) => {
   const { data } = useSearchImageQuery(dish);
 
-  if (!data) return;
-
   return (
     <div className={cn(className)}>
       <img src={data} alt={dish} className={cn(ratio, 'w-full')} />

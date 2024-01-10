@@ -7,7 +7,7 @@ const Instruction = ({ instruction }: InstructionType) => {
   const hasNumber = /^\d/.test(str);
 
   return (
-    <div className="flex w-full flex-1 flex-col items-center justify-center gap-2">
+    <div className="flex w-full flex-1 flex-col items-center justify-start gap-2">
       <div className="text-xl font-medium">요리 순서</div>
       <div className="flex flex-col gap-1">
         {instruction.map((item, index) => {
