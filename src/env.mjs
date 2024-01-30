@@ -14,6 +14,7 @@ export const env = createEnv({
         (str) => !str.includes('YOUR_MYSQL_URL_HERE'),
         'You forgot to change the default URL',
       ),
+    DIRECT_DATABASE_URL:z.string().url(),
     NODE_ENV: z
       .enum(['development', 'test', 'production'])
       .default('development'),
@@ -57,6 +58,7 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_GOOGLE_SEARCH_API_KEY,
     NEXT_PUBLIC_GOOGLE_SEARCH_ENGINE:
       process.env.NEXT_PUBLIC_GOOGLE_SEARCH_ENGINE,
+    DIRECT_DATABASE_URL:process.env.DIRECT_DATABASE_URL,
 
     // DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
     // DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
