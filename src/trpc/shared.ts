@@ -1,4 +1,5 @@
 import { type inferRouterInputs, type inferRouterOutputs } from '@trpc/server';
+import process from 'process';
 import superjson from 'superjson';
 
 import { type AppRouter } from '~/server/api/root';
@@ -7,7 +8,11 @@ export const transformer = superjson;
 
 function getBaseUrl() {
   if (typeof window !== 'undefined') return '';
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  // if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  // return `http://localhost:${process.env.PORT ?? 3000}`;
+  if (process.env.NODE_ENV === 'production') {
+    return 'https://your-recipe-nine.vercel.app';
+  }
   return `http://localhost:${process.env.PORT ?? 3000}`;
 }
 
